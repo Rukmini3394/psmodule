@@ -21,4 +21,5 @@ jobs:
       - name: Import the module
         shell: pwsh
         run: |
+          Register-PSRepository -Default
           Import-Module Microsoft.Graph.Entra.Beta
