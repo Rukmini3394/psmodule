@@ -1,0 +1,25 @@
+name: Azure AD B2C Policy Upload
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  install-and-upload:
+    runs-on: windows-latest  # Use a Windows runner
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3  # Checkout your repository code to access the PowerShell script
+
+      - name: Set up PowerShell
+        uses: actions/setup-powershell@v2  # Set up PowerShell on the runner
+
+      - name: Install Microsoft.Graph.Entra.Beta module
+        run: |
+          Install-Module -Name Microsoft.Graph.Entra.Beta -Force -AllowClobber -Scope CurrentUser
+
+      - name: Import the module
+        run: |
+          Import-Module Microsoft.Graph.Entra.Beta
