@@ -17,14 +17,12 @@ jobs:
         shell: pwsh
         run: |
           Install-Module -Name Microsoft.Graph.Entra.Beta -AllowPrerelease -Force -Scope CurrentUser
-          Install-Module -Name Microsoft.Graph.Entra -AllowPrerelease -Force -Scope CurrentUser
-          
+                   
       - name: Import the module
         shell: pwsh
         run: |
              Import-Module Microsoft.Graph.Entra.Beta
-             Import-Module Microsoft.Graph.Entra
-
+             
       - name: Connect the module
         shell: pwsh
         run: |
