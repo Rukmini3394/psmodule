@@ -19,6 +19,6 @@ jobs:
           Install-Module -Name Microsoft.Graph.Entra.Beta -AllowPrerelease
           
       - name: Import the module
-       shell: pwsh
+        shell: pwsh
         run: |
           Import-Module Microsoft.Graph.Entra.Beta
