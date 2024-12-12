@@ -16,8 +16,8 @@ jobs:
       - name: Install Microsoft.Graph.Entra.Beta module
         shell: pwsh
         run: |
-          Install-Module -Name Microsoft.Graph.Entra.Beta -Force -AllowClobber -Scope CurrentUser
-
+          Install-Module -Name Microsoft.Graph.Entra.Beta -AllowPrerelease
+          
       - name: Import the module
         run: |
           Import-Module Microsoft.Graph.Entra.Beta
