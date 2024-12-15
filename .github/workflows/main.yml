@@ -22,9 +22,15 @@ jobs:
         shell: pwsh
         run: |
              Import-Module Microsoft.Graph.Entra.Beta
-             
-      - name: Connect the module
+
+      - name: Install the module
         shell: pwsh
         run: |
-             Connect-Entra
+             Install-Module -Name AzureADPreview -Scope CurrentUser -Force -AllowClobber
+
+      - name: Import the module
+        shell: pwsh
+        run: |
+             Import-Module AzureADPreview
+   
 
