@@ -24,12 +24,12 @@ jobs:
              Import-Module AzureADPreview
 
       - name: Install the module
-        shell: pwsh
+        shell: powershell
         run: |
              Install-Module -Name AzureAD -Scope CurrentUser -Force -AllowClobber
 
       - name: Import the module
-        shell: pwsh
+        shell: powershell
         run: |
              Import-Module AzureAD
 
