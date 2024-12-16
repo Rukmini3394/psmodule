@@ -31,5 +31,4 @@ jobs:
           $aadToken = az account get-access-token --resource-type aad-graph | ConvertFrom-Json
           $graphToken = az account get-access-token --resource-type ms-graph | ConvertFrom-Json
           Connect-AzureAD -AadAccessToken $aadToken.accessToken -AccountId $service-principal-clientId -TenantId $tenantId -MsAccessToken $graphToken.accessToken
-          Set-AzureADMSTrustFrameworkPolicy -Id B2C_1A_TrustFrameworkExtensions -InputFilePath .\Templates\TrustFrameworkExtensions.xml
-        shell: powershell
+          shell: powershell
