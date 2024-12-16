@@ -13,28 +13,23 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3  # Checkout your repository code to access the PowerShell script
 
-      - name: Install the module
-        shell: pwsh
-        run: |
-             Install-Module -Name AzureADPreview -Scope CurrentUser -Force -AllowClobber
+      - name: Azure login
+        uses: azure/login@v2
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-      - name: Import the module
-        shell: pwsh
+      - name: Upload Files to Azure AD B2C
         run: |
-             Import-Module AzureADPreview
-
-      - name: Install the module
+          Install-Module -Name AzureADPreview -Scope CurrentUser -Force -AllowClobber
+          Import-Module AzureADPreview
+          if (Get-Module -Name AzureADPreview -ListAvailable) {
+              Write-Host "AzureADPreview module is installed."
+          } else {
+              Write-Host "AzureADPreview module is not installed."
+          }
+          az login --service-principal --username $service-principal-clientId --password $service-principal-password --tenant $tenantId --allow-no-subscriptions
+          $aadToken = az account get-access-token --resource-type aad-graph | ConvertFrom-Json
+          $graphToken = az account get-access-token --resource-type ms-graph | ConvertFrom-Json
+          Connect-AzureAD -AadAccessToken $aadToken.accessToken -AccountId $service-principal-clientId -TenantId $tenantId -MsAccessToken $graphToken.accessToken
+          Set-AzureADMSTrustFrameworkPolicy -Id B2C_1A_TrustFrameworkExtensions -InputFilePath .\Templates\TrustFrameworkExtensions.xml
         shell: powershell
-        run: |
-             Install-Module -Name AzureAD -Scope CurrentUser -Force -AllowClobber
-
-      - name: Import the module
-        shell: powershell
-        run: |
-             Import-Module AzureAD
-
-
-      - name: Connect the module
-        shell: pwsh
-        run: |
-             Connect-AzureAD
