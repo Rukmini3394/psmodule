@@ -22,11 +22,11 @@ jobs:
           access_token=$(az account get-access-token --resource-type ms-graph --query accessToken -o tsv | tr -d '\r')
 
           # Define the path to your policy file
-          policy_file="C:\Users\v-mrrukmini\Downloads\B2C_1A_ChangePhoneNumber.xml"
+          policy_file="C:\Users\v-mrrukmini\Downloads\B2C_1A_TESTPOLICY.xml"
 
           # Upload the policy file to Azure AD B2C
           az rest --method put \
-            --uri "https://graph.microsoft.com/beta/trustFramework/policies/B2C_1A_ChangePhoneNumber/\$value" \
+            --uri "https://graph.microsoft.com/beta/trustFramework/policies" \
             --headers "Content-Type=application/xml" "Authorization=Bearer $access_token" \
             --body "@$policy_file"
         shell: bash
