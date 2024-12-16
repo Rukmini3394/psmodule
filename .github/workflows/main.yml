@@ -16,7 +16,7 @@ jobs:
       - name: Azure login
         run: |
           # Log in to Azure using the service principal credentials directly
-          az login --service-principal --username "d6fc48d7-cc9b-4aa2-bea2-fa02c83fc376" --password ${{ secrets.password }} --tenant "a0cea021-2598-436f-93f0-502a2e82b10c" --allow-no-subscriptions
+          az login --service-principal --username "d6fc48d7-cc9b-4aa2-bea2-fa02c83fc376" --password "YT_8Q~SDJV0gXTBxtxhTLtwPGf.B69PBzKyVhc-B" --tenant "a0cea021-2598-436f-93f0-502a2e82b10c" --allow-no-subscriptions
 
           # Get the access token for Microsoft Graph API
           access_token=$(az account get-access-token --resource-type ms-graph --query accessToken -o tsv | tr -d '\r')
